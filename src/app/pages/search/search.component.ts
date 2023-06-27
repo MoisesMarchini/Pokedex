@@ -87,7 +87,6 @@ export class SearchComponent implements OnInit, OnDestroy{
   }
 
   loadList() {
-    console.log(this.searchRoute)
     const APICALL =
       this.searchRoute === 'type' ? this.pokedexService.getPokemonListByType(this.searchParam!) :
       this.searchRoute === 'move' ? this.pokedexService.getPokemonListByMove(this.searchParam!) : null;
@@ -99,7 +98,6 @@ export class SearchComponent implements OnInit, OnDestroy{
       next: (value) => {
         this._pokemonList = value;
         this.subscribeLastPkm();
-        console.log(this._pokemonList.length, this.pokemonList.length);
       }
     })
   }
