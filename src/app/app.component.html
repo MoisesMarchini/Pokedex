@@ -1,2 +1,4 @@
 <app-nav-bar></app-nav-bar>
-<router-outlet></router-outlet>
+<ng-container *ngIf="loaded">
+  <router-outlet></router-outlet>
+</ng-container>

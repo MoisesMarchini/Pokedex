@@ -9,15 +9,17 @@ import { environment } from './helpers/environment';
 })
 export class AppComponent implements OnInit{
   title = 'Pokedex';
+  loaded = false;
 
   constructor(
     private pokedexService: PokedexService
   ) {}
 
-  ngOnInit(): void {
-    this.pokedexService.getMany().subscribe({
+  ngOnInit() {
+    this.pokedexService.getAllPokemonList().subscribe({
       next: (value) => {
         environment.pokemonList = value;
+        this.loaded = true;
       }
     })
   }

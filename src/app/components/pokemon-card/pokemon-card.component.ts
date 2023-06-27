@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { environment } from 'src/app/helpers/environment';
-import { PokemonModel, Type } from 'src/app/models/pokemon';
+import { NameUrl } from 'src/app/models/NameUrl';
+import { PokemonModel } from 'src/app/models/pokemon';
 import { PokedexService } from 'src/app/services/pokedex.service';
 
 @Component({
@@ -12,15 +13,11 @@ export class PokemonCardComponent implements OnInit {
   @Input() pokemon?: PokemonModel;
   @Input() pokemonUrl?: string;
 
-  loaded = false;
-
   constructor(private pokedexService: PokedexService) { }
 
   ngOnInit() {
-    if (this.pokemon){
-      this.loaded = true;
+    if (this.pokemon)
       return;
-    }
 
     if (!this.pokemon && this.pokemonUrl) {
 
@@ -30,14 +27,12 @@ export class PokemonCardComponent implements OnInit {
 
       if (fetchedPkm) {
         this.pokemon = fetchedPkm;
-        this.loaded = true;
         return;
       }
 
-      this.pokedexService.getByUrl(this.pokemonUrl).subscribe({
+      this.pokedexService.getPokemonByUrl(this.pokemonUrl).subscribe({
         next: (pkm) => {
           this.pokemon = pkm;
-          this.loaded = true;
         }
       })
     }
@@ -50,7 +45,7 @@ export class PokemonCardComponent implements OnInit {
     return this.pokemon.types.map(typeSlot => `type-${typeSlot.type.name}-light`)[0];
   }
 
-  getChipBgColor(type: Type): string {
+  getChipBgColor(type: NameUrl): string {
     return `type-${type.name}`;
   }
 

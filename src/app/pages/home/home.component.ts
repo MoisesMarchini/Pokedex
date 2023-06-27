@@ -1,60 +1,58 @@
-import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { PokedexService } from '../../services/pokedex.service';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { environment } from 'src/app/helpers/environment';
-import { PokemonList } from 'src/app/models/pokemonList';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements AfterViewInit, OnInit {
   @ViewChildren('lastPkm', { read: ElementRef }) lastPkmList: QueryList<ElementRef> | undefined;
+
+  subscription?: Subscription;
 
   take = 20;
   currentPage = 0;
 
   observer: any;
-  private _lazyList: PokemonList[] = [];
-  get lazyList() {
-    if (environment.searchText === '')
-      return this._lazyList;
 
-    const filteredList =
-      environment.pokemonList
-        .filter((pkm, index) => pkm.name.toLowerCase().includes(environment.searchText.toLowerCase()) || (index + 1).toString() == (environment.searchText));
-    return filteredList;
+  get lazyList() {
+    const endAt = (this.currentPage * this.take) + this.take;
+    return environment.pokemonList
+      .filter((pkm, index) =>
+        pkm.name.toLowerCase().includes(environment.searchText.toLowerCase()) ||
+        (index + 1).toString() == (environment.searchText)
+      )
+      .slice(0, endAt);
   }
 
-  constructor(
-    private pokedexService: PokedexService
-  ) { }
+  headerText() {
+    const searchParam = environment.searchText;
+    if (!searchParam)
+      return '';
+
+    let result = 'Exibindo Pokémons '
+    let capitalizedStr = searchParam.charAt(0).toUpperCase() + searchParam.slice(1).toLowerCase();
+    result += ` e que possuam '${capitalizedStr}' no nome ou no id`
+
+    return result;
+  }
+
+  constructor() { }
 
   ngOnInit() {
     this.intersectionObserver();
-    if(environment.pokemonList.length === 0)
-      this.pokedexService.getMany().subscribe({
-        next: (value) => {
-          environment.pokemonList = value;
-          this.loadMore(false);
-          this.subscribeLastPkm();
-        }
-      })
-    else{
-      this.loadMore(false);
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.currentPage++;
       this.subscribeLastPkm();
-    }
+    }, 200);
   }
 
-  subscribeLastPkm() {
-    this.lastPkmList?.changes?.subscribe((d) => {
-      if (d.last)
-        this.observer.observe(d.last.nativeElement);
-    })
-  }
-
-  isSearchTextEmpty() {
-    return environment.searchText === '';
+  ngOnDestroy() {
   }
 
   intersectionObserver() {
@@ -67,19 +65,16 @@ export class HomeComponent implements OnInit {
     this.observer = new IntersectionObserver((entries) => {
 
       if (entries[0].isIntersecting) {
-        this.loadMore();
+        this.currentPage += this.lazyList.length < environment.pokemonList.length? 1 : 0;
       }
 
     }, options);
   }
 
-  loadMore(increase: boolean = true) {
-    if (!this.isSearchTextEmpty())
-      return;
-    if (increase)
-      this.currentPage++;
-    const beginAt = this.currentPage * this.take;
-    const endAt = beginAt + this.take;
-    this._lazyList = this._lazyList.concat(environment.pokemonList.slice(beginAt, endAt));
+  subscribeLastPkm() {
+    this.subscription = this.lastPkmList?.changes.subscribe((d) => {
+      if (d.last)
+        this.observer.observe(d.last.nativeElement);
+    })
   }
 }

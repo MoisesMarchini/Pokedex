@@ -1,6 +1,8 @@
 
 a {
+  color: transparent;
   text-decoration: none;
+  --background-color: rgba(175, 175, 175, 0.452);
 }
 
 .card-pokemon{
@@ -9,6 +11,7 @@ a {
   overflow: hidden;
   position: relative;
   transition: var(--default-anim-duration) ease;
+  background-color: var(--background-color);
 }
 
 .card-pokemon:hover{

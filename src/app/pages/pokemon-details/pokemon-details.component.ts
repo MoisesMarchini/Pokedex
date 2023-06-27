@@ -2,7 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/app/helpers/environment';
-import { PokemonModel, Type } from 'src/app/models/pokemon';
+import { NameUrl } from 'src/app/models/NameUrl';
+import { PokemonModel } from 'src/app/models/pokemon';
 import { PokedexService } from 'src/app/services/pokedex.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class PokemonDetailsComponent implements OnInit, OnDestroy {
   subscription?: Subscription;
   pokemon?: PokemonModel;
 
-  tabs = ['Base Status'];//, 'Moveset']
+  tabs = ['Base Status', 'Moveset']
   currentTabIndex = 0;
 
   constructor(
@@ -26,6 +27,7 @@ export class PokemonDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    environment.hideSearchBar = true;
     if (!this.activatedRoute.snapshot.params['id']) {
       this.router.navigateByUrl('/');
       return;
@@ -46,6 +48,7 @@ export class PokemonDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    environment.hideSearchBar = false;
     this.subscription?.unsubscribe();
   }
 
@@ -57,7 +60,7 @@ export class PokemonDetailsComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.pokedexService.getById(this.id).subscribe({
+    this.pokedexService.getPokemonById(this.id).subscribe({
       next: (value) => {
         this.pokemon = value;
       }
@@ -71,7 +74,7 @@ export class PokemonDetailsComponent implements OnInit, OnDestroy {
     return this.pokemon.types.map(typeSlot => `type-${typeSlot.type.name}-light`)[0];
   }
 
-  getChipBgColor(type: Type): string {
+  getChipBgColor(type: NameUrl): string {
     return `type-${type.name}`;
   }
 

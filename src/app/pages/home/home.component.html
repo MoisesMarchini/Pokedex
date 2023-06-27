@@ -1,4 +1,7 @@
 <div class="wrapper">
+  <p
+  [class.d-none]="headerText() === ''"
+  class="m-0 mt-2 text-muted fw-semibold">{{headerText()}}</p>
   <div class="pokemon-list d-grid my-2">
     <ng-container *ngFor="let pkm of lazyList; let i = index">
       <app-pokemon-card #lastPkm *ngIf="i === lazyList.length - 1" [pokemonUrl]="pkm.url"></app-pokemon-card>

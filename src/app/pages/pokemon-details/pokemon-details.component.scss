@@ -1,11 +1,11 @@
-.wrapper-bg{
+.wrapper-bg {
   position: relative;
-  background-color: transparent;
-  min-height: calc(100vh - 4rem);
-  min-height: calc(100svh - 4rem - 1px);
+  background-color: var(--background-color);
+  min-height: calc(100vh - 4rem - 1px);
+  // min-height: calc(100svh - 4rem - 1px);
 
-  &::before{
-    content: '';
+  &::before {
+    content: "";
     position: absolute;
     top: calc((4rem + 1px) * -1);
     left: 0;
@@ -14,17 +14,20 @@
     background-color: var(--background-color);
     z-index: -1;
   }
-  &::after{
-    content: '';
+  &::after {
+    content: "";
     position: absolute;
     left: 0;
     right: 0;
-    top: calc(40vmin);
+    top: calc(35vmin);
     bottom: 0;
     border-radius: 10px;
     margin: 4px;
     background-color: var(--bs-body-bg);
-    z-index: -1;
+    z-index: 0;
+  }
+  > * {
+    z-index: 1;
   }
 }
 
@@ -37,30 +40,30 @@
   background-color: transparent;
   display: grid;
   place-content: center;
-  &::before{
-    content: '';
+  &::before {
+    content: "";
     border: 8px solid transparent;
   }
-  &.inactive{
+  &.inactive {
     display: none;
   }
-  &.control-prev{
+  &.control-prev {
     left: 0;
     transform: translateX(-125%);
-    &::before{
+    &::before {
       border-right-color: black;
     }
   }
-  &.control-next{
+  &.control-next {
     right: 0;
     transform: translateX(125%);
-    &::before{
+    &::before {
       border-left-color: black;
     }
   }
 }
 
-.pokemon-info{
+.pokemon-info {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -80,77 +83,83 @@
   width: clamp(160px, 40vmin, 400px);
 }
 
-.type-group{
+.type-group {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: .5rem;
-  .type{
+  gap: 0.5rem;
+  .type {
     text-decoration: none;
     padding: 0 0.5rem;
     font-weight: 600;
     font-size: 0.85rem;
     border-radius: 50px;
-    transition: calc(var(--default-anim-duration) * .5);
-    &:hover{
+    transition: calc(var(--default-anim-duration) * 0.5);
+    &:hover {
       color: var(--text-color);
       scale: (1.05);
     }
   }
 }
 
-.tabs-container{
+.tabs-container {
   --border-color: rgb(165, 165, 165);
+  --border-color: var(--background-color);
   display: flex;
   flex-direction: column;
   background-color: var(--bs-body-bg);
 
-  .nav-tabs{
+  .nav-tabs {
     --bs-nav-tabs-border-color: var(--border-color);
     display: flex;
-    .nav-tab-btn{
+    .nav-tab-btn {
       transition: var(--default-anim-duration);
       color: var(--border-color);
-      padding: .5rem 1rem;
+      padding: 0.5rem 1rem;
       background-color: transparent;
       border: 0;
       border-bottom: 1px solid transparent;
       margin-bottom: -1px;
       font-weight: 600;
-      &:hover, &.active {
-        border-color: black;
-        color: black
+      opacity: .5;
+      &:hover,
+      &.active {
+        --border-color: var(--background-strong-color);
+        opacity: 1;
       }
     }
   }
-  .tabs-content-container{
+  .tabs-content-container {
     position: relative;
     width: 100%;
+    overflow-y: auto;
     overflow-x: hidden;
     padding: 1rem;
-    .tab-content{
+    .tab-content {
       position: relative;
+      overflow: hidden;
       width: 100%;
       transition: var(--default-anim-duration);
-      &.inactive{
+      &.inactive {
         visibility: hidden;
+        height: calc(100% - 1rem);
         top: 1rem;
         left: 1rem;
       }
-      &.prev{
+      &.prev {
         position: absolute;
         transform: translateX(calc(-100% - 1rem));
       }
-      &.next{
+      &.next {
         position: absolute;
-        transform:translateX(calc(100% + 1rem));
+        transform: translateX(calc(100% + 1rem));
       }
     }
   }
 }
 
 @media (min-width: 1024px) {
-  .pokemon-info{
+  .pokemon-info {
     flex-direction: row;
     max-width: unset;
     justify-content: center;
@@ -158,12 +167,12 @@
   .info {
     width: 40%;
   }
-  .pokemon-name{
+  .pokemon-name {
     text-align: center;
   }
-  .tabs-container{
-    --border-color: var(--background-color);
+  .tabs-container {
     width: clamp(400px, 480px, 60%);
     border-radius: 10px;
+    height: clamp(300px, 400px, 50vh);
   }
 }

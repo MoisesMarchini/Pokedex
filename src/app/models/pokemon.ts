@@ -1,7 +1,10 @@
+import { NameUrl } from "./NameUrl"
+
 export interface PokemonModel {
   id: number,
   name: string,
   types: TypeSlot[],
+  moves: MoveSlot[],
   sprites: {
     other: {
       'official-artwork'?: {
@@ -14,16 +17,16 @@ export interface PokemonModel {
 
 export interface TypeSlot {
   slot: number,
-  type: Type
+  type: NameUrl
 }
 
-export interface Type {
-  name: string,
-  url: string
+export interface MoveSlot {
+  move: NameUrl,
+  levelLearned?: number
 }
 
 export interface Stats {
   base_stat: number,
   effort: number,
-  stat: Type
+  stat: NameUrl
 }

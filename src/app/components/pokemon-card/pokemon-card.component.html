@@ -1,24 +1,24 @@
-<ng-container *ngIf="pokemon && loaded">
-  <a [routerLink]="['/pokemon/'+pokemon.name]">
-    <div [class]="'card-pokemon ' + getCardBgColor()">
-      <img src="/assets/images/pokeball-bg.png" class="pokeball-bg">
+<a [routerLink]="['/pokemon/'+pokemon?.name]">
+  <div [class]="'card-pokemon ' + getCardBgColor()">
+    <img src="/assets/images/pokeball-bg.png" class="pokeball-bg">
+    <ng-container *ngIf="pokemon">
       <div class="pokedex-id text-capitalize">
         {{formatNumberWithLeadingZeros(pokemon.id)}} - {{pokemon.name}}
       </div>
-      <div class="pokemon-info">
-        <div class="info-left">
-          <div class="type-group">
-            <ng-container *ngFor="let typeSlot of pokemon.types">
-              <div [class]="'type text-uppercase ' + getChipBgColor(typeSlot.type)">
-                {{typeSlot.type.name}}
-              </div>
-            </ng-container>
-          </div>
-        </div>
-        <div class="info-right">
-          <img [src]="pokemon.sprites.other['official-artwork']?.front_default" class="pokemon-img">
+    </ng-container>
+    <div class="pokemon-info">
+      <div class="info-left">
+        <div class="type-group">
+          <ng-container *ngFor="let typeSlot of pokemon?.types">
+            <div [class]="'type text-uppercase ' + getChipBgColor(typeSlot.type)">
+              {{typeSlot.type.name}}
+            </div>
+          </ng-container>
         </div>
       </div>
+      <div class="info-right">
+        <img [src]="pokemon?.sprites!.other['official-artwork']?.front_default" class="pokemon-img">
+      </div>
     </div>
-  </a>
-</ng-container>
+  </div>
+</a>

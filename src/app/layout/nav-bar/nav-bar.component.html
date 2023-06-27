@@ -1,10 +1,12 @@
 <nav
-[class.sticky]="!scrolled"
+[class.sticky]="scrolledUp"
 class="w-100">
   <div class="wrapper">
     <a routerLink="/" class="title h5 m-0 me-3">
       Pokedex
     </a>
-    <input type="text" #searchBar id="search-bar" class="rounded-pill px-3 py-2" [(ngModel)]="searchText">
+    <ng-container *ngIf="!hideSearchBar()">
+      <input type="text" #searchBar id="search-bar" class="rounded-pill px-3 py-2" [(ngModel)]="searchText">
+    </ng-container>
   </div>
 </nav>

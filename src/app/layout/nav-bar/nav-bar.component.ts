@@ -8,19 +8,26 @@ import { environment } from 'src/app/helpers/environment';
 })
 export class NavBarComponent implements OnInit {
 
-  scrolled = false;
+  private previousScrollY = 0;
+  scrolledUp = false;
+
+  get searchText() { return environment.searchText }
+  set searchText(text) { environment.searchText = text }
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  get searchText() { return environment.searchText }
-  set searchText(text) { environment.searchText = text }
+  hideSearchBar() { return environment.hideSearchBar }
 
   @HostListener('document:scroll')
   onScroll() {
-    this.scrolled = window.scrollY > 0;
+    const currentScrollY = window.scrollY;
+
+    this.scrolledUp = currentScrollY < this.previousScrollY && currentScrollY !== 0;
+
+    this.previousScrollY = currentScrollY;
   }
 
 }

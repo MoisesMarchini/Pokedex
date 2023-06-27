@@ -19,14 +19,16 @@
           </div>
           <div class="type-group">
             <ng-container *ngFor="let typeSlot of pokemon.types">
-              <a [routerLink]="['/search/', typeSlot.type.name]" [class]="'type text-uppercase ' + getChipBgColor(typeSlot.type)">
+              <a [routerLink]="['/search/type/', typeSlot.type.name]" [class]="'type text-uppercase ' + getChipBgColor(typeSlot.type)">
                 {{typeSlot.type.name}}
               </a>
             </ng-container>
           </div>
         </div>
         <div class="tabs-container container mt-5 p-0">
-          <nav class="nav-tabs">
+          <nav
+          [style]="'--background-strong-color: var(--bs-type-'+ pokemon.types[0].type.name +')'"
+          class="nav-tabs">
             <ng-container *ngFor="let tab of tabs; let i = index">
               <button class="nav-tab-btn" [class.active]="i === currentTabIndex" (click)="currentTabIndex = i">
                 {{tab}}
@@ -40,8 +42,44 @@
               [class.next]="i > currentTabIndex"
               [class.inactive]="i !== currentTabIndex"
               class="tab-content">
-              <ng-container *ngFor="let stat of pokemon.stats">
-                <app-status-progressbar [type]="pokemon.types[0].type.name" [title]="stat.stat.name" [value]="stat.base_stat"></app-status-progressbar>
+              <ng-container *ngIf="tab === 'Base Status'">
+                <ng-container *ngFor="let stat of pokemon.stats">
+                  <app-status-progressbar [type]="pokemon.types[0].type.name" [title]="stat.stat.name" [value]="stat.base_stat"></app-status-progressbar>
+                </ng-container>
+              </ng-container>
+              <ng-container *ngIf="tab === 'Moveset'">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead class="text-uppercase">
+                      <tr>
+                        <th class="text-center fw-semibold">
+                          lv
+                        </th>
+                        <th class="fw-semibold">
+                          Nome
+                        </th>
+                        <th class="text-center fw-semibold">
+                          ACC
+                        </th>
+                        <th class="text-center fw-semibold">
+                          PWR
+                        </th>
+                        <th class="text-center fw-semibold">
+                          TIPO
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngFor="let moveslot of pokemon.moves">
+                        <app-moveset-table
+                        [movesetUrl]="moveslot.move.url"
+                        [level]="moveslot.levelLearned"
+                        [style]="'--background-color: var(--bs-type-'+ pokemon.types[0].type.name +'-light)'"
+                        class="border-bottom"></app-moveset-table>
+                      </ng-container>
+                    </tbody>
+                  </table>
+                </div>
               </ng-container>
               </div>
             </ng-container>

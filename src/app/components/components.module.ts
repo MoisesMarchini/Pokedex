@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { PokemonCardComponent } from './pokemon-card/pokemon-card.component';
 import { StatusProgressbarComponent } from './status-progressbar/status-progressbar.component';
 import { RouterModule } from '@angular/router';
+import { MovesetComponent } from './moveset-table/moveset-table.component';
 
 @NgModule({
   imports: [
@@ -11,11 +12,13 @@ import { RouterModule } from '@angular/router';
   ],
   declarations: [
     PokemonCardComponent,
-    StatusProgressbarComponent
+    StatusProgressbarComponent,
+    MovesetComponent
   ],
   exports: [
     PokemonCardComponent,
-    StatusProgressbarComponent
+    StatusProgressbarComponent,
+    MovesetComponent
   ]
 })
 export class ComponentsModule { }

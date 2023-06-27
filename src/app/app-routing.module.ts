@@ -7,7 +7,8 @@ import { SearchComponent } from './pages/search/search.component';
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'pokemon/:id', component: PokemonDetailsComponent},
-  {path: 'search/:type', component: SearchComponent},
+  {path: 'search/type/:type', component: SearchComponent},
+  {path: 'search/move/:move', component: SearchComponent},
 ];
 
 @NgModule({

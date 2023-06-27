@@ -1,7 +1,9 @@
 <div class="wrapper">
+  <p class="m-0 mt-2 text-muted fw-semibold">{{headerText()}}</p>
   <div class="pokemon-list d-grid my-2">
-    <ng-container *ngFor="let pkm of pokemonList">
-      <app-pokemon-card [pokemonUrl]="pkm.url"></app-pokemon-card>
+    <ng-container *ngFor="let pkm of pokemonList; let i = index">
+      <app-pokemon-card #lastPkm *ngIf="i === pokemonList.length - 1" [pokemonUrl]="pkm.url"></app-pokemon-card>
+      <app-pokemon-card *ngIf="i !== pokemonList.length - 1" [pokemonUrl]="pkm.url"></app-pokemon-card>
     </ng-container>
   </div>
 </div>

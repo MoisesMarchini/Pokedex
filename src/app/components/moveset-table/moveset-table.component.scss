@@ -1,0 +1,11 @@
+:host {
+  display: table-row;
+
+  text-wrap: nowrap;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+:host:hover{
+  background-color: var(--background-color);
+}
