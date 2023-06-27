@@ -1,0 +1,53 @@
+<div [class]="'w-100 wrapper-bg '+getCardBgColor()">
+  <div class="wrapper py-2 py-lg-4">
+    <ng-container *ngIf="pokemon">
+      <div class="pokemon-info">
+        <div class="info">
+          <div class="pokemon-name text-capitalize w-100">
+            <h5 class="fw-semibold">{{formatNumberWithLeadingZeros() + ' - ' + pokemon.name}}</h5>
+          </div>
+          <div class="img-container position-relative">
+            <button class="control control-prev" [class.inactive]="pokemon.id === 1" (click)="goToPrev()">
+
+            </button>
+            <button class="control control-next" (click)="goToNext()">
+
+            </button>
+            <ng-container *ngIf="pokemon.sprites.other['official-artwork']?.front_default">
+              <img [src]="pokemon.sprites.other['official-artwork']?.front_default" class="pokemon-img m-2">
+            </ng-container>
+          </div>
+          <div class="type-group">
+            <ng-container *ngFor="let typeSlot of pokemon.types">
+              <a [routerLink]="['/search/', typeSlot.type.name]" [class]="'type text-uppercase ' + getChipBgColor(typeSlot.type)">
+                {{typeSlot.type.name}}
+              </a>
+            </ng-container>
+          </div>
+        </div>
+        <div class="tabs-container container mt-5 p-0">
+          <nav class="nav-tabs">
+            <ng-container *ngFor="let tab of tabs; let i = index">
+              <button class="nav-tab-btn" [class.active]="i === currentTabIndex" (click)="currentTabIndex = i">
+                {{tab}}
+              </button>
+            </ng-container>
+          </nav>
+          <div class="tabs-content-container">
+            <ng-container *ngFor="let tab of tabs; let i = index">
+              <div
+              [class.prev]="i < currentTabIndex"
+              [class.next]="i > currentTabIndex"
+              [class.inactive]="i !== currentTabIndex"
+              class="tab-content">
+              <ng-container *ngFor="let stat of pokemon.stats">
+                <app-status-progressbar [type]="pokemon.types[0].type.name" [title]="stat.stat.name" [value]="stat.base_stat"></app-status-progressbar>
+              </ng-container>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

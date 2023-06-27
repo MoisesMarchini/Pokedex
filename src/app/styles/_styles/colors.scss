@@ -1,0 +1,102 @@
+$grass: #3E9709;
+$grass-light: #7EB95B;
+$fire: #f34b21;
+$fire-light: #f57d32;
+$water: #0A7ABC;
+$water-light: #5BA6D2;
+$normal: #CCC9AA;
+$normal-light: #DDDBC6;
+$flying: #5EB9B2;
+$flying-light: #93D0CB;
+$bug: #91BA2E;
+$bug-light: #BDDD6E;
+$poison: #A819D7;
+$poison-light: #C565E4;
+$electric: #ffc107;
+$electric-light: #FFFB6D;
+$ground: #ccbd49;
+$ground-light: #EDE293;
+$fighting: #E81319;
+$fighting-light: #EF6165;
+$psychic: #EC0E63;
+$psychic-light: #F55792;
+$rock: #776A3E;
+$rock-light: #94834F;
+$ice: #1995A1;
+$ice-light: #65B8C0;
+$ghost: #8E55A4;
+$ghost-light: #B38DC2;
+$dragon: #8A55FD;
+$dragon-light: #B18DFD;
+$dark: #5F4632;
+$dark-light: #916852;
+$steel: #7B8E8A;
+$steel-light: #BBC5C4;
+$fairy: #dd80a0;
+$fairy-light: #FDD1E0;
+
+$types: (
+  'grass':  $grass,
+  'grass-light':  $grass-light,
+  'fire':  $fire,
+  'fire-light':  $fire-light,
+  'water':  $water,
+  'water-light':  $water-light,
+  'normal':  $normal,
+  'normal-light':  $normal-light,
+  'flying': $flying,
+  'flying-light': $flying-light,
+  'bug': $bug,
+  'bug-light': $bug-light,
+  'poison': $poison,
+  'poison-light': $poison-light,
+  'electric': $electric,
+  'electric-light': $electric-light,
+  'ground': $ground,
+  'ground-light': $ground-light,
+  'fighting': $fighting,
+  'fighting-light': $fighting-light,
+  'psychic': $psychic,
+  'psychic-light': $psychic-light,
+  'rock': $rock,
+  'rock-light': $rock-light,
+  'ice': $ice,
+  'ice-light': $ice-light,
+  'ghost': $ghost,
+  'ghost-light': $ghost-light,
+  'dragon': $dragon,
+  'dragon-light': $dragon-light,
+  'dark': $dark,
+  'dark-light': $dark-light,
+  'steel': $steel,
+  'steel-light': $steel-light,
+  'fairy': $fairy,
+  'fairy-light': $fairy-light,
+);
+
+@function contrast-color($color) {
+  @if (lightness($color) > 50) {
+    @return #000000; // Preto para cores claras
+  } @else {
+    @return #ffffff; // Branco para cores escuras
+  }
+}
+
+@each $color in $types{
+  $name: nth($color, 1);
+  $value: nth($color, 2);
+  .type-#{$name}{
+    --background-color: #{$value};
+    --text-color: #{contrast-color(nth($color, 2))};
+    background-color: var(--background-color);
+    color: contrast-color(nth($color, 2));
+  }
+}
+
+:root{
+  @each $color in $types{
+    $name: nth($color, 1);
+    $value: nth($color, 2);
+    --bs-type-#{$name}: #{$value};
+  }
+}

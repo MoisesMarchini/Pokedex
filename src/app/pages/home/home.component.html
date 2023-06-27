@@ -1,0 +1,8 @@
+<div class="wrapper">
+  <div class="pokemon-list d-grid my-2">
+    <ng-container *ngFor="let pkm of lazyList; let i = index">
+      <app-pokemon-card #lastPkm *ngIf="i === lazyList.length - 1" [pokemonUrl]="pkm.url"></app-pokemon-card>
+      <app-pokemon-card *ngIf="i !== lazyList.length - 1" [pokemonUrl]="pkm.url"></app-pokemon-card>
+    </ng-container>
+  </div>
+</div>

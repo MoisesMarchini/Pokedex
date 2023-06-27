@@ -1,0 +1,89 @@
+
+a {
+  text-decoration: none;
+}
+
+.card-pokemon{
+  border-radius: 10px;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  position: relative;
+  transition: var(--default-anim-duration) ease;
+}
+
+.card-pokemon:hover{
+  scale: (1.05);
+  z-index: 1;
+  .pokeball-bg{
+    animation-play-state: running;
+  }
+}
+
+.pokedex-id{
+  position: absolute;
+  top: .5rem;
+  left: 1rem;
+  font-weight: 600;
+}
+
+.pokemon-info{
+  padding: 1rem;
+  padding-top: 2.25rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  z-index: 1;
+
+  .info-right, .info-left{
+    width: 50%;
+    height: 100%;
+  }
+
+  .info-left{
+    display: flex;
+    align-items: flex-start;
+    .type-group{
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: .5rem;
+      .type{
+        padding: 0 0.5rem;
+        font-weight: 600;
+        font-size: 0.7rem;
+        border-radius: 50px;
+      }
+    }
+  }
+
+  .info-right{
+    display: flex;
+    place-content: center;
+    .pokemon-img{
+      object-fit: cover;
+      height: 100%;
+    }
+  }
+}
+
+.pokeball-bg{
+  position: absolute;
+  z-index: 0;
+  object-fit: cover;
+  height: 80%;
+  left: 0;
+  bottom: 0;
+  transform: translate(-20%, 20%);
+  opacity: .25;
+
+  animation: rotate 10s infinite linear;
+  animation-play-state: paused;
+}
+
+@keyframes rotate {
+  to{
+    transform: translate(-20%, 20%) rotate(1turn);
+  }
+}

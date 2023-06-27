@@ -1,0 +1,15 @@
+<div
+[style]="'--main-light-color: var(--bs-type-'+type+'-light); --main-color: var(--bs-type-'+type+')'"
+class="d-flex progress-bar-container">
+  <p class="title">
+    {{title}}
+  </p>
+  <div class="vertical-bar"></div>
+  <p class="value">
+    {{formatNumberWithLeadingZeros()}}
+  </p>
+  <div
+  [style]="'--active-width: ' + (loaded? ((value / maxValue) * 100) : 0) + '%;'"
+  class="progress-bar">
+  </div>
+</div>

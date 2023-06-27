@@ -1,0 +1,7 @@
+<div class="wrapper">
+  <div class="pokemon-list d-grid my-2">
+    <ng-container *ngFor="let pkm of pokemonList">
+      <app-pokemon-card [pokemonUrl]="pkm.url"></app-pokemon-card>
+    </ng-container>
+  </div>
+</div>

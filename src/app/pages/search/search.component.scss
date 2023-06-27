@@ -1,0 +1,4 @@
+.pokemon-list{
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(clamp(180px, 280px, 100%), 1fr));
+}

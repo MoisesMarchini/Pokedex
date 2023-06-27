@@ -1,0 +1,44 @@
+:host {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+nav {
+  --border-color: rgb(190, 190, 190);
+  transition: var(--default-anim-duration);
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bs-body-bg);
+  &.sticky{
+    border-bottom-color: transparent;
+    background-color: transparent;
+  }
+}
+
+.wrapper{
+  line-height: 1;
+  height: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#search-bar{
+  border: 1px solid var(--border-color);
+  outline: 0;
+  transition: var(--default-anim-duration);
+  flex-grow: 1;
+  max-width: 400px;
+  min-width: 0;
+  padding: 0.25rem 0.75rem;
+  font-size: .875rem;
+  &:focus {
+    border-color: inherit;
+  }
+}
