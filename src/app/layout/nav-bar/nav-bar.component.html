@@ -1,8 +1,9 @@
 <nav
 [class.sticky]="scrolledUp"
+[class.d-none]="hideNavBar()"
 class="w-100">
   <div class="wrapper">
-    <a routerLink="/" class="title h5 m-0 me-3">
+    <a routerLink="/" class="title h5 m-0 me-5">
       Pokedex
     </a>
     <ng-container *ngIf="!hideSearchBar()">

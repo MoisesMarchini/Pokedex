@@ -1,0 +1,18 @@
+<ng-container *ngIf="moveset && loaded">
+  <td class="text-capitalize text-center" (click)="onClick()">
+    {{level}}
+  </td>
+  <td class="text-capitalize" (click)="onClick()">
+    {{moveset.name}}
+  </td>
+  <td class="text-center" (click)="onClick()">
+    {{moveset.accuracy?? 100}}
+  </td>
+  <td class="text-center" (click)="onClick()">
+    {{moveset.power?? 100}}
+  </td>
+  <td class="text-center text-uppercase" (click)="onClick()">
+    <img [src]="damageClassImg" [alt]="moveset.damage_class.name">
+    <!-- {{moveset.damage_class.name}} -->
+  </td>
+</ng-container>

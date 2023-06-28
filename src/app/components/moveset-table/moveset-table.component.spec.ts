@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MovesetComponent } from './moveset-table.component';
+import { MovesetTableComponent } from './moveset-table.component';
 
 describe('MovesetTableComponent', () => {
-  let component: MovesetComponent;
-  let fixture: ComponentFixture<MovesetComponent>;
+  let component: MovesetTableComponent;
+  let fixture: ComponentFixture<MovesetTableComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MovesetComponent ]
+      declarations: [ MovesetTableComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(MovesetComponent);
+    fixture = TestBed.createComponent(MovesetTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

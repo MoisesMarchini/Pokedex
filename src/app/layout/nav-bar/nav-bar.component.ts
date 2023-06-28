@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { environment } from 'src/app/helpers/environment';
 
 @Component({
@@ -14,12 +15,13 @@ export class NavBarComponent implements OnInit {
   get searchText() { return environment.searchText }
   set searchText(text) { environment.searchText = text }
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
   hideSearchBar() { return environment.hideSearchBar }
+  hideNavBar() { return this.router.url.includes('pokemon') }
 
   @HostListener('document:scroll')
   onScroll() {

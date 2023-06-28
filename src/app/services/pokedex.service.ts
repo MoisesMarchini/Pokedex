@@ -91,7 +91,7 @@ export class PokedexService {
   }
 
   getAllPokemonList(): Observable<NameUrl[]> {
-    const GET_MANYROUTE = `pokemon?limit=${100000}&offset=${0}`;
+    const GET_MANYROUTE = `pokemon?limit=${1080}&offset=${0}`;
     return this.httpClient.get<NameUrl[]>(BASE_APIURL + GET_MANYROUTE).pipe(
       map((result: any) => {
         return result.results as NameUrl[];

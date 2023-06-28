@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/app/helpers/environment';
 import { NameUrl } from 'src/app/models/NameUrl';
 import { PokemonModel } from 'src/app/models/pokemon';
 import { PokedexService } from 'src/app/services/pokedex.service';
+import { RouteHistoryService } from 'src/app/services/route-history.service';
 
 @Component({
   selector: 'app-pokemon-details',
@@ -23,6 +24,7 @@ export class PokemonDetailsComponent implements OnInit, OnDestroy {
     private pokedexService: PokedexService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
+    private routeHistory: RouteHistoryService
   ) {
   }
 
@@ -84,9 +86,9 @@ export class PokemonDetailsComponent implements OnInit, OnDestroy {
 
     const numAsString = this.pokemon.id.toString();
     if (numAsString.length > 3) {
-      return '#' + numAsString;
+      return numAsString;
     } else {
-      return '#' + numAsString.padStart(3, '0');
+      return numAsString.padStart(3, '0');
     }
   }
 
@@ -96,6 +98,14 @@ export class PokemonDetailsComponent implements OnInit, OnDestroy {
 
   goToPrev() {
     this.router.navigateByUrl('/pokemon/' + (this.pokemon!.id - 1));
+  }
+
+  getLastHistoryUrl() {
+    return this.routeHistory.getLastHistoryUrl();
+  }
+
+  pop() {
+    this.routeHistory.pop();
   }
 
 }

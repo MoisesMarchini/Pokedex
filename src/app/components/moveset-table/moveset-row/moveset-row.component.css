@@ -1,0 +1,54 @@
+:host {
+  display: table-row;
+
+  text-wrap: nowrap;
+  white-space: nowrap;
+  cursor: pointer;
+  position: relative;
+  height: 2.5rem;
+}
+
+:host:hover{
+  background-color: var(--background-color);
+}
+
+:host::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding: .5rem;
+  background: var(--bs-border-color);
+
+    /* linear-gradient(
+      90deg,
+      transparent 20%,
+      var(--bs-border-color),
+      transparent 80%
+    ); */
+  background-size: 300%;
+  background-repeat: no-repeat;
+  animation: fillEffect 8s linear infinite forwards;
+}
+
+:host.loaded::before{
+  display: none;
+}
+
+td{
+  font-size: small;
+  line-height: 1;
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+@keyframes fillEffect {
+  0% {
+    background-position: -100% 0; /* Movimento da esquerda para a direita */
+  }
+  100% {
+    background-position: 200% 0; /* Movimento da direita para a esquerda */
+  }
+}

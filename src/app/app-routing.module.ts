@@ -9,6 +9,7 @@ const routes: Routes = [
   {path: 'pokemon/:id', component: PokemonDetailsComponent},
   {path: 'search/type/:type', component: SearchComponent},
   {path: 'search/move/:move', component: SearchComponent},
+  { path: '**', redirectTo: '/' }
 ];
 
 @NgModule({

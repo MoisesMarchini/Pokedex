@@ -3,22 +3,22 @@ import { CommonModule } from '@angular/common';
 import { PokemonCardComponent } from './pokemon-card/pokemon-card.component';
 import { StatusProgressbarComponent } from './status-progressbar/status-progressbar.component';
 import { RouterModule } from '@angular/router';
-import { MovesetComponent } from './moveset-table/moveset-table.component';
+import { MovesetTableModule } from './moveset-table/moveset-table.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    MovesetTableModule
   ],
   declarations: [
     PokemonCardComponent,
     StatusProgressbarComponent,
-    MovesetComponent
   ],
   exports: [
     PokemonCardComponent,
     StatusProgressbarComponent,
-    MovesetComponent
+    MovesetTableModule
   ]
 })
 export class ComponentsModule { }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PokedexService } from './services/pokedex.service';
 import { environment } from './helpers/environment';
+import { RouteHistoryService } from './services/route-history.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,8 @@ export class AppComponent implements OnInit{
   loaded = false;
 
   constructor(
-    private pokedexService: PokedexService
+    private pokedexService: PokedexService,
+    private routeHistory: RouteHistoryService
   ) {}
 
   ngOnInit() {
