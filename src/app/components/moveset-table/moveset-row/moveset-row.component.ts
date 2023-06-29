@@ -8,7 +8,7 @@ import { PokedexService } from 'src/app/services/pokedex.service';
 @Component({
   selector: 'app-moveset-row',
   templateUrl: './moveset-row.component.html',
-  styleUrls: ['./moveset-row.component.css']
+  styleUrls: ['./moveset-row.component.scss']
 })
 export class MovesetRowComponent implements OnInit {
   @Input() moveset?: MovesetModel;
