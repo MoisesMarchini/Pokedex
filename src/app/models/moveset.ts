@@ -7,5 +7,6 @@ export interface MovesetModel {
   power?: number;
   accuracy?: number,
   damage_class: NameUrl,
+  type: NameUrl,
   learned_by_pokemon: NameUrl[]
 }

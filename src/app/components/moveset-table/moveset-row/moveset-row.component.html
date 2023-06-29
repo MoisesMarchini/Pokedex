@@ -6,13 +6,17 @@
     {{moveset.name}}
   </td>
   <td class="text-center" (click)="onClick()">
-    {{moveset.accuracy?? 100}}
+    {{moveset.power?? '-'}}
   </td>
   <td class="text-center" (click)="onClick()">
-    {{moveset.power?? 100}}
+    {{moveset.accuracy?? '-'}}
+  </td>
+  <td class="text-center text-uppercase" (click)="onClick()">
+    <div [class]="'type type-'+moveset.type.name">
+     {{moveType}}
+    </div>
   </td>
   <td class="text-center text-uppercase" (click)="onClick()">
     <img [src]="damageClassImg" [alt]="moveset.damage_class.name">
-    <!-- {{moveset.damage_class.name}} -->
   </td>
 </ng-container>

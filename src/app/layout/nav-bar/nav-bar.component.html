@@ -7,7 +7,9 @@ class="w-100">
       Pokedex
     </a>
     <ng-container *ngIf="!hideSearchBar()">
-      <input type="text" #searchBar id="search-bar" class="rounded-pill px-3 py-2" [(ngModel)]="searchText">
+      <input type="text" #searchBar id="search-bar" class="rounded-pill px-3 py-2"
+       placeholder="Procurar por nome ou id"
+       [(ngModel)]="searchText">
     </ng-container>
   </div>
 </nav>

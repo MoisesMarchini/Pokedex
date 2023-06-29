@@ -3,7 +3,7 @@
     <img src="/assets/images/pokeball-bg.png" class="pokeball-bg">
     <ng-container *ngIf="pokemon">
       <div class="pokedex-id text-capitalize">
-        {{formatNumberWithLeadingZeros(pokemon.id)}} - {{pokemon.name}}
+        {{formatNumberWithLeadingZeros()}} - {{pokemon.name}}
       </div>
     </ng-container>
     <div class="pokemon-info">
@@ -11,7 +11,7 @@
         <div class="type-group">
           <ng-container *ngFor="let typeSlot of pokemon?.types">
             <div [class]="'type text-uppercase ' + getChipBgColor(typeSlot.type)">
-              {{typeSlot.type.name}}
+              {{getTranslatedType(typeSlot.type.name)}}
             </div>
           </ng-container>
         </div>

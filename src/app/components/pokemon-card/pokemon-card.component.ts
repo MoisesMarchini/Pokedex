@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { environment } from 'src/app/helpers/environment';
+import { GlobalFunctions } from 'src/app/helpers/globalFunctions';
 import { NameUrl } from 'src/app/models/NameUrl';
 import { PokemonModel } from 'src/app/models/pokemon';
 import { PokedexService } from 'src/app/services/pokedex.service';
@@ -42,20 +43,22 @@ export class PokemonCardComponent implements OnInit {
     if (!this.pokemon)
       return '';
 
-    return this.pokemon.types.map(typeSlot => `type-${typeSlot.type.name}-light`)[0];
+    return GlobalFunctions.getCardBgColor(this.pokemon);
   }
 
   getChipBgColor(type: NameUrl): string {
-    return `type-${type.name}`;
+    return GlobalFunctions.getChipBgColor(type);
   }
 
-  formatNumberWithLeadingZeros(num: number, length: number = 3) {
-    const numAsString = num.toString();
-    if (numAsString.length > length) {
-      return '#' + numAsString;
-    } else {
-      return '#' + numAsString.padStart(length, '0');
-    }
+  formatNumberWithLeadingZeros() {
+    if (!this.pokemon)
+      return '';
+
+    return GlobalFunctions.formatNumberWithLeadingZeros(this.pokemon.id);
+  }
+
+  getTranslatedType(type: string) {
+    return GlobalFunctions.getTranslatedType(type);
   }
 
 }

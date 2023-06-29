@@ -110,18 +110,6 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 0.5rem;
-  .type {
-    text-decoration: none;
-    padding: 0 0.5rem;
-    font-weight: 600;
-    font-size: 0.85rem;
-    border-radius: 50px;
-    transition: calc(var(--default-anim-duration) * 0.5);
-    &:hover {
-      color: var(--text-color);
-      scale: (1.05);
-    }
-  }
 }
 
 .tabs-container {
@@ -185,10 +173,10 @@
     right: -1rem;
   }
   .pokemon-info {
-    max-width: unset;
+    max-width: clamp(400px, 520px, 100%);
   }
   .tabs-container {
-    width: clamp(400px, 520px, 80%);
+    width: clamp(400px, 520px, 100%);
     border-radius: 10px;
     // height: clamp(300px, 400px, 50vh);
   }

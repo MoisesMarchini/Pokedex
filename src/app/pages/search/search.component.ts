@@ -21,6 +21,9 @@ export class SearchComponent implements OnInit, OnDestroy{
   currentPage = 0;
 
   headerText() {
+    if (this.pokemonList.length === 0)
+      return 'Nenhum Pokémon encontrado';
+
     let result = 'Exibindo Pokémons '
     if (!this.searchParam)
       return result;

@@ -29,7 +29,7 @@ export class StatusProgressbarComponent implements OnInit {
   }
 
   increaseCurrentValue() {
-    this.subscription = interval(5).subscribe({
+    this.subscription = interval(2.5).subscribe({
       next: (value) => {
         if (this.currentValue < this.value)
           this.currentValue++;

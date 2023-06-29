@@ -21,16 +21,6 @@
   bottom: 0;
   padding: .5rem;
   background: var(--bs-border-color);
-
-    /* linear-gradient(
-      90deg,
-      transparent 20%,
-      var(--bs-border-color),
-      transparent 80%
-    ); */
-  background-size: 300%;
-  background-repeat: no-repeat;
-  animation: fillEffect 8s linear infinite forwards;
 }
 
 :host.loaded::before{
@@ -44,11 +34,8 @@ td{
   vertical-align: middle;
 }
 
-@keyframes fillEffect {
-  0% {
-    background-position: -100% 0; /* Movimento da esquerda para a direita */
-  }
-  100% {
-    background-position: 200% 0; /* Movimento da direita para a esquerda */
-  }
+.type{
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 4px;
 }

@@ -28,6 +28,9 @@ export class HomeComponent implements AfterViewInit, OnInit {
   }
 
   headerText() {
+    if (this.lazyList.length === 0)
+      return 'Nenhum Pokémon encontrado';
+
     const searchParam = environment.searchText;
     if (!searchParam)
       return '';

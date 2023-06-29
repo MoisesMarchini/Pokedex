@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/app/helpers/environment';
+import { GlobalFunctions } from 'src/app/helpers/globalFunctions';
 import { NameUrl } from 'src/app/models/NameUrl';
 import { PokemonModel } from 'src/app/models/pokemon';
 import { PokedexService } from 'src/app/services/pokedex.service';
@@ -73,23 +74,22 @@ export class PokemonDetailsComponent implements OnInit, OnDestroy {
     if (!this.pokemon)
       return '';
 
-    return this.pokemon.types.map(typeSlot => `type-${typeSlot.type.name}-light`)[0];
+    return GlobalFunctions.getCardBgColor(this.pokemon);
   }
 
   getChipBgColor(type: NameUrl): string {
-    return `type-${type.name}`;
+    return GlobalFunctions.getChipBgColor(type);
   }
 
   formatNumberWithLeadingZeros() {
     if (!this.pokemon)
       return '';
 
-    const numAsString = this.pokemon.id.toString();
-    if (numAsString.length > 3) {
-      return numAsString;
-    } else {
-      return numAsString.padStart(3, '0');
-    }
+    return GlobalFunctions.formatNumberWithLeadingZeros(this.pokemon.id);
+  }
+
+  getTranslatedType(type: string) {
+    return GlobalFunctions.getTranslatedType(type);
   }
 
   goToNext() {

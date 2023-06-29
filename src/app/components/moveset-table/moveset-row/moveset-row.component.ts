@@ -1,6 +1,7 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/app/helpers/environment';
+import { GlobalFunctions } from 'src/app/helpers/globalFunctions';
 import { MovesetModel } from 'src/app/models/moveset';
 import { PokedexService } from 'src/app/services/pokedex.service';
 
@@ -22,6 +23,7 @@ export class MovesetRowComponent implements OnInit {
     '/assets/images/damage-class-special.png'
   ];
   damageClassImg?: string;
+  moveType?: string;
 
   @HostBinding('class')
   get hostClasses(): string {
@@ -71,6 +73,7 @@ export class MovesetRowComponent implements OnInit {
     if (!this.moveset)
       return;
 
+    this.moveType = GlobalFunctions.getTranslatedType(this.moveset.type.name);
     const damageClassIndex = this.damageClassesStrings.findIndex(p => p === this.moveset!.damage_class.name.toLowerCase());
     this.damageClassImg = this.damageClassesImgs[damageClassIndex];
   }

@@ -1,0 +1,12 @@
+.type {
+  text-decoration: none;
+  padding: 0 0.5rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  border-radius: 50px;
+  transition: calc(var(--default-anim-duration) * 0.5);
+  &:hover {
+    color: var(--text-color);
+    scale: (1.05);
+  }
+}

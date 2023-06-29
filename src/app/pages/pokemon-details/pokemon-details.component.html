@@ -33,7 +33,7 @@
           <div class="type-group">
             <ng-container *ngFor="let typeSlot of pokemon.types">
               <a [routerLink]="['/search/type/', typeSlot.type.name]" [class]="'type text-uppercase ' + getChipBgColor(typeSlot.type)">
-                {{typeSlot.type.name}}
+                {{getTranslatedType(typeSlot.type.name)}}
               </a>
             </ng-container>
           </div>
